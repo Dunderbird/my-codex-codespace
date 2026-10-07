@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+  <title>Counter</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f4f7fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(100%, 390px);
+      padding: 36px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #e5eaf1;
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgb(28 43 68 / 9%);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 650;
+      letter-spacing: .02em;
+      color: #65718a;
+    }
+
+    output {
+      display: block;
+      margin: 22px 0 30px;
+      font-size: clamp(5rem, 24vw, 7rem);
+      font-weight: 750;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.07em;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      min-height: 54px;
+      border: 0;
+      border-radius: 14px;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 650;
+      cursor: pointer;
+      transition: transform 120ms ease, background-color 120ms ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(1px); }
+    button:focus-visible { outline: 3px solid #92b5ff; outline-offset: 3px; }
+
+    .change { color: #fff; background: #315fce; }
+    .change:hover { background: #254fae; }
+    .reset {
+      grid-column: 1 / -1;
+      min-height: 46px;
+      color: #526078;
+      background: #eef2f8;
+    }
+    .reset:hover { background: #e3e9f2; }
+  </style>
+</head>
+<body>
+  <main aria-labelledby="title">
+    <h1 id="title">COUNTER</h1>
+    <output id="count" aria-live="polite" aria-atomic="true">0</output>
+    <div class="controls">
+      <button class="change" id="decrease" type="button" aria-label="Decrease count">− Decrease</button>
+      <button class="change" id="increase" type="button" aria-label="Increase count">+ Increase</button>
+      <button class="reset" id="reset" type="button">Reset</button>
+    </div>
+  </main>
+  <script>
+    const display = document.querySelector('#count');
+    let count = 0;
+
+    function update(nextCount) {
+      count = nextCount;
+      display.textContent = count;
+    }
+
+    document.querySelector('#decrease').addEventListener('click', () => update(count - 1));
+    document.querySelector('#increase').addEventListener('click', () => update(count + 1));
+    document.querySelector('#reset').addEventListener('click', () => update(0));
+  </script>
+</body>
+</html>
